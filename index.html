@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+    body{
+      background-color: hsl(216, 12%, 8%);
+      font-family: 'Quicksand', sans-serif;
+    }
+    .body{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .main{
+      background-color: hsl(213, 19%, 18%);
+      width: 260px;
+      max-width: 260px;
+      border-radius: 20px;
+      padding: 20px;
+    }
+    .numbers{
+      display: flex;
+      justify-content: space-evenly;
+    }
+    h1{
+      font-size: 20px;
+    }
+    .digits{
+      background-color: hsl(220, 21%, 74%);
+      padding: 15px 20px;
+      border-radius: 50%;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+      transition: .5s;
+    }
+    .btn{
+      display: block;
+      background-color: hsl(25, 97%, 53%);
+      color: #ffffff;
+      border-radius: 30px;
+      padding: 8px;
+      text-align: center;
+      margin: 10px 0;
+      text-decoration: none;
+    }
+    .orange{
+      background-color: hsl(25, 97%, 53%);
+    }
+    .light-gray{
+      background-color: hsl(218, 11%, 44%);
+    }
+    .btn:hover{
+      background-color: white;
+      color: hsl(25, 97%, 53%);
+    }
+    .img{
+      background-color: hsl(220, 21%, 74%);
+      padding: 15px;
+      border-radius: 50%;
+    }
+    .body .hidden{
+      display: none;
+    }
+    .thankyouPage{
+      background-color: hsl(213, 19%, 18%);
+      width: 260px;
+      max-width: 260px;
+      border-radius: 20px;
+      padding: 20px;
+      display: grid;
+      place-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+    .thankyouPage img{
+      width: 150px;
+    }
+    .thankyouPage h1{
+      margin-bottom: -10px;
+    }
+    .thankyouPage p, .thankyouPage h1{
+      color: hsl(218, 14%, 68%);
+    }
+
+    #selection{
+      font-size: 12px;
+      padding: 8px;
+      display: block;
+      max-width: 200px;
+      background-color: hsl(218, 11%, 44%);
+      color: hsl(25, 97%, 53%);
+      margin: 0 auto;
+      border-radius: 20px;
+    }
+    #error{
+      font-size: 16px;
+      color: red;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Rating state start -->
+  <div class="body">
+    <div id="main" class="main">
+      <img class="img" src="images/icon-star.svg" alt="">
+      <h1>How did we do?</h1>
+      <p>Please let us know how we did with your support request. All feedback is appreciated
+        to help us improve our offering!</p>
+        <p id="error" class="hidden">Please select a review</p>
+        <div class="numbers">
+          <button class="digits">1</button>
+          <button class="digits">2</button>
+          <button class="digits">3</button>
+          <button class="digits">4</button>
+          <button class="digits">5</button>
+        </div>
+      <a href="" id="submit" class="btn">Submit</a>
+    </div>
+
+
+    
+      <div id="thankyouPage" class="thankyouPage hidden">
+        <img src="./images/illustration-thank-you.svg" alt="">
+        <p id="selection"></p>
+        <h1>Thank You</h1>
+        <p>We appreciate you taking the time to give a rating. If you ever need more support,
+          don't hesitate to get in touch!</p>
+      </div>
+  </div>
+
+
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+
+  <script>
+    let buttons = document.querySelectorAll(".digits");
+    let value;
+    
+    buttons.forEach((button, i) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        buttons.forEach(button => {
+          button.classList.remove('orange');
+          button.classList.remove('light-gray');
+        })
+        button.classList.add('orange');
+        buttons[i - 1].classList.add('light-gray');
+        let value = button.innerHTML;
+        document.getElementById("selection").textContent = `You selected ${value} out of 5`;
+        
+      })
+
+    })
+
+    document.getElementById('submit').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('main').classList.add('hidden');
+        document.getElementById('thankyouPage').classList.remove('hidden');
+    })
+
+  </script>
+</body>
+</html>
